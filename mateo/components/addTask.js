@@ -1,3 +1,4 @@
+import { uniqueDates } from '../../services/date.js';
 import checkComplete from './checkComplete.js';
 import deleteIcon from './deleteIcon.js';
 import {  displayTasks  } from './readTasks.js'; 
@@ -25,7 +26,8 @@ export const addTask = (evento) => {
   const taskObj = {
     value,
     dateFormat,
-    complete
+    complete,
+    id: uuid.v4(),
   }
 
   list.innerHTML = '';
@@ -37,20 +39,26 @@ export const addTask = (evento) => {
   displayTasks();
 }
 
-export const createTask = ({ value, dateFormat, complete }) => {
+export const createTask = ({ value, dateFormat, complete, id }) => {
   const task = document.createElement('li');
   task.classList.add('card');
 
   const taskContent = document.createElement('div');
 
   console.log(complete);
+
+  const check = checkComplete(id);
+
   if (complete) {
     console.log('completada');
+    check.classList.toggle('fas');
+    check.classList.toggle('completeIcon');
+    check.classList.toggle('far');
   }
   const titleTask = document.createElement('span');
   titleTask.classList.add('task');
   titleTask.innerText = value;
-  taskContent.appendChild(checkComplete());
+  taskContent.appendChild(check);
   taskContent.appendChild(titleTask);
 
   const dateElement = document.createElement("span");
