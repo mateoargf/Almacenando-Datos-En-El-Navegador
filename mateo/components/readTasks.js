@@ -2,7 +2,7 @@ import { createTask } from './addTask.js';
 import { uniqueDates } from '../../services/date.js';
 import dateElement from './dateElement.js';
 
-export const readTasks = () => {
+export const displayTasks = () => {
     const list = document.querySelector("[data-list]");
     const tasksList = JSON.parse(localStorage.getItem('tasks')) || [];
     const dates = uniqueDates(tasksList);
