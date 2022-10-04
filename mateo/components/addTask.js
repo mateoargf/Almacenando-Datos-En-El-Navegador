@@ -20,9 +20,12 @@ export const addTask = (evento) => {
   input.value = '';
   calendar.value = '';
 
+  const complete = false;
+
   const taskObj = {
     value,
-    dateFormat
+    dateFormat,
+    complete
   }
 
   list.innerHTML = '';
@@ -34,12 +37,16 @@ export const addTask = (evento) => {
   displayTasks();
 }
 
-export const createTask = ({ value, dateFormat }) => {
+export const createTask = ({ value, dateFormat, complete }) => {
   const task = document.createElement('li');
   task.classList.add('card');
 
   const taskContent = document.createElement('div');
 
+  console.log(complete);
+  if (complete) {
+    console.log('completada');
+  }
   const titleTask = document.createElement('span');
   titleTask.classList.add('task');
   titleTask.innerText = value;
